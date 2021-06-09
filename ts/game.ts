@@ -7,17 +7,25 @@ context ? context.fillStyle = '#FFFFFF': null;
 
 
 
-function loop() {
-    var running = true
-    while (running) {
 
-    }
-}
 function steerShip() {
 
 }
 
 var ship = new Ship(canvas.width,canvas.height)
-ship.drawShip(context!,0,0)
+// var FPS = 50
+// setInterval(() => {   
+//     context?.clearRect(0,0,canvas!.width,canvas!.height)
+//     ship.drawShip(context!)
+//     ship.steerShip()
+//     },1000/FPS)
 
+function update() {
+    context?.clearRect(0,0,canvas!.width,canvas!.height)
+    ship.drawShip(context!)
+    
+    requestAnimationFrame(update)
+}
+update()
+ship.steerShip()
 }
