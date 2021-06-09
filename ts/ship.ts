@@ -19,12 +19,12 @@ class Ship {
         this.health = 50
         this.x = winWidth/2
         this.y = winHeight/2
-        this.x1 = 0
-        this.y1 = 0
+        this.x1 = 0 
+        this.y1 = 0 + this.y
         this.x2 = 100
-        this.y2 = 50
+        this.y2 = 50 + this.y
         this.x3 = 0
-        this.y3 = 100
+        this.y3 = 100 + this.y
         this.halfHeight = 50
         this.up = 'ArrowUp' || 'Up'
         this.down = 'ArrowDown' || 'Down'
