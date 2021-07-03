@@ -14,22 +14,28 @@ class Ship {
     y2:number;
     y3:number;
     halfHeight:number;
+    size:number;//num that represents width and length of ship
+    x_mid:number;
+    y_mid:number;
 
     constructor(winWidth:number,winHeight:number) {
         this.health = 50
-        this.x = winWidth/2
+        this.size = 100
+        this.x = 0
         this.y = winHeight/2
         this.x1 = 0 
-        this.y1 = 0 + this.y
-        this.x2 = 100
-        this.y2 = 50 + this.y
+        this.y1 = winHeight/2 - (this.size/2)
+        this.x2 = this.size
+        this.y2 = winHeight/2
         this.x3 = 0
-        this.y3 = 100 + this.y
+        this.y3 = winHeight/2 + (this.size/2)
         this.halfHeight = 50
         this.up = 'ArrowUp' || 'Up'
         this.down = 'ArrowDown' || 'Down'
         this.left = 'ArrowLeft' || 'Left'
         this.right = 'ArrowRight' || 'Right'
+        this.x_mid = this.size/2 + this.x1
+        this.y_mid = this.size/2 + this.y1
     }
 
     drawShip(context:CanvasRenderingContext2D) {
