@@ -1,7 +1,7 @@
 window.onload = ()=> {
 var canvas:HTMLCanvasElement|null = document.getElementById('canvas') as HTMLCanvasElement
-canvas.width = 1280
-canvas.height = 720
+canvas.width = 900
+canvas.height = 550
 var context = canvas.getContext('2d');
 context ? context.fillStyle = '#FF0000': null;
 
