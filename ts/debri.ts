@@ -8,9 +8,9 @@ export class Debri {
     static count:number = 0
     constructor() {
         // Coordinates and size
-        this.x = Math.random() * 100
-        this.y = Math.random() * 100
-        this.size = Math.random() * 10
+        this.x = Math.random() * 550 //random number between 1 and 550
+        this.y = Math.random() * 900 // between 1 and 900
+        this.size = Math.random() * 50// 1 - 50
 
         // Debri mid point
         this.x_mid = this.x + (this.size/2)
@@ -42,28 +42,6 @@ export class Debri {
         this.y += addition
     }
 
-    async floatDebri(context:CanvasRenderingContext2D) {
-        
-        var offscreen:number = (0 - this.size)
-        while(this.x_mid <= offscreen) {
-            console.log()
-            setInterval(async()=> {
-                this.alterXPosition(-20)
-                this.drawDebri(context)
-                console.log('floating debri')
-            }, 1000)
-            
-        }
-    }
-
-    static async generateDebri(context:CanvasRenderingContext2D) {
-        //every 2 seconds - generate debri
-        setInterval(async()=> {
-            console.log('generating debri')
-            var debri = new Debri()
-            debri.drawDebri(context)
-            await debri.floatDebri(context)
-        }, 1000)
-    }
+    
 
 }
