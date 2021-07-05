@@ -1,6 +1,8 @@
-#js files
+#js folder
 js
 
+#css folder
+css
 # Logs
 logs
 *.log
