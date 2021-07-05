@@ -1,5 +1,5 @@
 
-class Ship {
+export class Ship {
     up:string
     down:string
     left:string
@@ -20,7 +20,7 @@ class Ship {
 
     constructor(winWidth:number,winHeight:number) {
         this.health = 50
-        this.size = 100
+        this.size = 50//100
         this.x = 0
         this.y = winHeight/2
         this.x1 = 0 
