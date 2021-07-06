@@ -3,11 +3,11 @@ import { Ship } from "../js/ship"
 
 var canvas1 = document.getElementById('canvas1') as HTMLCanvasElement
 var canvas2 = document.getElementById('canvas2') as HTMLCanvasElement
-canvas1.width = 900
-canvas1.height = 550
+canvas1.width = 918
+canvas1.height = 560
 var context1 = canvas1.getContext('2d') as CanvasRenderingContext2D;
-canvas2.width = 900
-canvas2.height = 550
+canvas2.width = 918
+canvas2.height = 560
 context1 ? context1.fillStyle = '#FF0000': console.error('context is null');
 
 
