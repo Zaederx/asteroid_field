@@ -16,6 +16,7 @@ context1.fillStyle = 'rgba(0, 0, 200, 0.5)'
 
 var gameRunning = true
 var ship = new Ship(canvas1.width,canvas1.height)
+var debri = new Debri(canvas2.width,canvas2.height)
 var FPS = 3.5
 var oneSecond = 1000 //ms
 
@@ -27,6 +28,7 @@ function updateCanvas1() {
     // context2?.clearRect(0,0,canvas2!.width,canvas2!.height)
     ship.drawShip(context1)
     updateShipScore()
+    displayDistanceToDebri()
     if (ship.health <= 0) {
         gameOver()
     }
@@ -34,7 +36,17 @@ function updateCanvas1() {
         requestAnimationFrame(updateCanvas1)
     }
 }
-
+function displayDistanceToDebri() {
+    var x = ship.x_mid - debri.x_mid
+    var y = ship.y_mid - debri.y_mid
+    var distance = pythagoras(x,y)
+    var text = "Debri Distance to Ship:"+distance
+    var tx = 400
+    var ty = 30
+    context1.font = '30px Arial'
+    context1.fillText(text,tx,ty)
+    
+}
 /**
  * Enables ship scores
  */
@@ -159,8 +171,10 @@ function runGame() {
     // Game
     updateCanvas1()
     enableShipSteering()
-    updateCanvas2()
-    generateDebri()
+    
+    debri.drawDebri(context2)
+    // updateCanvas2()
+    // generateDebri()
 }
 
 //Play Game 
