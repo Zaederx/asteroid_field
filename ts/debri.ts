@@ -10,7 +10,7 @@ export class Debri {
     static count:number = 0
     constructor(screenWidth:number, screenHeight:number) {
         // Coordinates and size
-        this.x = Math.random() * (screenWidth/2) +(screenWidth/2)  //random number between 1 and 550
+        this.x = Math.random() * (screenWidth/2) +(screenWidth/2)  //random number between 275 and 550
         //generate beyond halfway point of screen to give ship time to react
         this.y = Math.random() * screenHeight// between 1 and 900
         this.size = Math.random() * 40 + 10// 10 - 50

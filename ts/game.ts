@@ -84,7 +84,7 @@ function generateDebri() {
         if(gameRunning) {
             generateDebri()
         }
-    },1000)//how often debri is generates - in ms
+    },1000)//how often debri is generated - in ms
 }
 
 
