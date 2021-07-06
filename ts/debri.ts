@@ -8,7 +8,9 @@ export class Debri {
     y_mid:number
     collision:boolean
     static count:number = 0
-    constructor(screenWidth:number, screenHeight:number) {
+    image:any
+    
+    constructor(screenWidth:number, screenHeight:number, imgSrc?:string) {
         // Coordinates and size
         this.x = Math.random() * (screenWidth/2) +(screenWidth/2)  //random number between 275 and 550
         //generate beyond halfway point of screen to give ship time to react
@@ -20,6 +22,13 @@ export class Debri {
         this.y_mid = this.y + (this.size/2)
 
         this.collision = false
+        
+        //Image
+        if (imgSrc) {
+            this.image = new Image()
+            this.image.src = imgSrc
+        }
+
         // Debri Number
         this.number = Debri.count
         Debri.count++
@@ -34,8 +43,14 @@ export class Debri {
 
     drawDebri(context:CanvasRenderingContext2D) {
         // this.print()
-        context.fillStyle = '#000000'
-        context.fillRect(this.x,this.y, this.size, this.size)
+        if (this.image) {
+            context.drawImage(this.image,this.x,this.y,this.size,this.size)
+        }
+        else {
+            context.fillStyle = '#000000'
+            context.fillRect(this.x,this.y, this.size, this.size)
+        }
+        
     }
 
     alterXPosition(addition:number) {

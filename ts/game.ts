@@ -18,7 +18,9 @@ context1.fillStyle = 'rgba(0, 0, 200, 0.5)'
 var gameRunning = true
 var imageSrc = '../img/ship.svg'
 var ship = new Ship(canvas1.width,canvas1.height,imageSrc)
-var FPS = 3.5
+var canvas1FPS = 3.5
+var canvas2FPS = 3.5
+var debriGenerationSpeed = 1000//ms
 var oneSecond = 1000 //ms
 var clock = new StopClock()
 clock.tick()
@@ -82,7 +84,7 @@ function updateCanvas2() {
         if (gameRunning) {
             updateCanvas2()
         }
-    },oneSecond/FPS) // how often debri canvas is updated
+    },oneSecond/canvas2FPS) // how often debri canvas is updated
 }
 
 /**
@@ -90,14 +92,15 @@ function updateCanvas2() {
  */
 function generateDebri() {
     console.log('generating debri')
-    var debri = new Debri(canvas2.width,canvas2.height)
+    var imgSrc = '../img/asteroid.svg'
+    var debri = new Debri(canvas2.width,canvas2.height, imgSrc)
     debri.drawDebri(context2)
     floatDebri(context2,debri)
     setTimeout(()=> {
         if(gameRunning) {
             generateDebri()
         }
-    },1000)//how often debri is generated - in ms
+    },debriGenerationSpeed)//how often debri is generated - in ms
 }
 
 
@@ -139,6 +142,7 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
         }
         
     }
+
     if(debri.x_mid >= offscreen && gameRunning) {
         setTimeout(() => {
             debri.alterXPosition(-20)
@@ -147,7 +151,7 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
         setTimeout(()=> {
             debri.drawDebri(context)
 
-        }, oneSecond/100)//how often redrawn/painted on screen
+        }, oneSecond/(canvas1FPS))//how often redrawn/painted on screen
     }
     
 }

@@ -19,6 +19,7 @@ export class Ship {
     x_mid:number;
     y_mid:number;
     image:any;
+    
     constructor(winWidth:number,winHeight:number,imgSrc?:string) {
         this.health = 50
         this.size = 50//100
