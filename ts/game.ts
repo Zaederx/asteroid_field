@@ -1,5 +1,6 @@
 import { Debri } from "../js/debri"
 import { Ship } from "../js/ship"
+import { StopClock } from "../js/StopClock"
 
 var canvas1 = document.getElementById('canvas1') as HTMLCanvasElement
 var canvas2 = document.getElementById('canvas2') as HTMLCanvasElement
@@ -19,7 +20,8 @@ var imageSrc = '../img/ship.svg'
 var ship = new Ship(canvas1.width,canvas1.height,imageSrc)
 var FPS = 3.5
 var oneSecond = 1000 //ms
-
+var clock = new StopClock()
+clock.tick()
 /**
  * Updates canvas one - clearing screen for next repaint/drawing
  */
@@ -27,6 +29,8 @@ function updateCanvas1() {
     context1?.clearRect(0,0,canvas1!.width,canvas1!.height)
     // context2?.clearRect(0,0,canvas2!.width,canvas2!.height)
     ship.drawShip(context1)
+    clock.tick()
+    displayTime(clock)
     updateShipScore()
     if (ship.health <= 0) {
         gameOver()
@@ -36,6 +40,14 @@ function updateCanvas1() {
     }
 }
 
+async function displayTime(clock:StopClock) {
+
+    var text = clock.getClockDisplay()
+    var x = 500
+    var y = 30
+    context1.font = '30px Arial'
+    context1.fillText(text,x,y)
+}
 /**
  * Enables ship scores
  */
@@ -142,6 +154,7 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
 
 function gameOver() {
     gameRunning = false
+    clock.stopTicking()
 }
 
 /**
