@@ -15,12 +15,14 @@ export class Ship {
     y3:number;
     halfHeight:number;
     size:number;//num that represents width and length of ship
+    radius:number;
     x_mid:number;
     y_mid:number;
 
     constructor(winWidth:number,winHeight:number) {
         this.health = 50
         this.size = 50//100
+        this.radius = this.size/2
         this.x = 0
         this.y = winHeight/2
         this.x1 = 0 
@@ -53,12 +55,14 @@ export class Ship {
         this.y1 += num
         this.y2 += num
         this.y3 += num
+        this.y_mid += num
     }
 
     moveXCoordinates(num:number) {
         this.x1 += num
         this.x2 += num
         this.x3 += num
+        this.x_mid += num
     }
 
     steerShip() {

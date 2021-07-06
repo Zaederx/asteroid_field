@@ -2,6 +2,7 @@ export class Debri {
     x:number
     y:number
     size:number
+    radius:number
     number:number
     x_mid:number
     y_mid:number
@@ -12,8 +13,8 @@ export class Debri {
         this.x = Math.random() * (screenWidth/2) +(screenWidth/2)  //random number between 1 and 550
         //generate beyond halfway point of screen to give ship time to react
         this.y = Math.random() * screenHeight// between 1 and 900
-        this.size = Math.random() * 50// 1 - 50
-
+        this.size = Math.random() * 40 + 10// 10 - 50
+        this.radius = this.size/2
         // Debri mid point
         this.x_mid = this.x + (this.size/2)
         this.y_mid = this.y + (this.size/2)
@@ -39,10 +40,12 @@ export class Debri {
 
     alterXPosition(addition:number) {
         this.x += addition
+        this.x_mid += addition
     }
 
     alterYPosition(addition:number) {
         this.y += addition
+        this.y_mid += addition
     }
 
     

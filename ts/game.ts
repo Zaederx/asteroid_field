@@ -84,7 +84,7 @@ function generateDebri() {
         if(gameRunning) {
             generateDebri()
         }
-    },3000)//how often debri is generates - in ms
+    },1000)//how often debri is generates - in ms
 }
 
 
@@ -95,7 +95,7 @@ function generateDebri() {
  * @returns 
  */
 function pythagoras(xDelta:number,yDelta:number):number {
-    var distance = (xDelta^2 + yDelta^2)^0.5
+    var distance = (xDelta**2 + yDelta**2)**0.5
     return distance
 }
 /**
@@ -111,7 +111,7 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
     var y = ship.y_mid - debri.y_mid
 
     var distance = pythagoras(x,y)
-    var allowedDistance = ship.size + debri.size
+    var allowedDistance = ship.radius + debri.radius
     if (debri.collision == false && distance <= allowedDistance) {
         console.log('Collision. Ship health:', ship.health)
         debri.collision = true
