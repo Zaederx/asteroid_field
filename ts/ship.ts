@@ -18,8 +18,8 @@ export class Ship {
     radius:number;
     x_mid:number;
     y_mid:number;
-
-    constructor(winWidth:number,winHeight:number) {
+    image:any;
+    constructor(winWidth:number,winHeight:number,imgSrc?:string) {
         this.health = 50
         this.size = 50//100
         this.radius = this.size/2
@@ -38,20 +38,31 @@ export class Ship {
         this.right = 'ArrowRight' || 'Right'
         this.x_mid = this.size/2 + this.x1
         this.y_mid = this.size/2 + this.y1
+        if (imgSrc) {
+            this.image = new Image()
+            this.image.src = imgSrc
+        }
+        
     }
 
     drawShip(context:CanvasRenderingContext2D) {
-        context?.beginPath()
-        context?.moveTo(this.x1,this.y1)
-        context?.lineTo(this.x2, this.y2)
-        context?.stroke()
-        context?.lineTo(this.x3, this.y3)
-        context?.stroke()
-        context?.lineTo(this.x1,this.y1)
-        context?.stroke()
+        if (this.image) {
+            context.drawImage(this.image,this.x,this.y,this.size,this.size)
+        }
+        else {
+            context?.beginPath()
+            context?.moveTo(this.x1,this.y1)
+            context?.lineTo(this.x2, this.y2)
+            context?.stroke()
+            context?.lineTo(this.x3, this.y3)
+            context?.stroke()
+            context?.lineTo(this.x1,this.y1)
+            context?.stroke()
+        }
     }
 
     moveYCoordinates(num:number) {
+        this.y += num
         this.y1 += num
         this.y2 += num
         this.y3 += num
@@ -59,6 +70,7 @@ export class Ship {
     }
 
     moveXCoordinates(num:number) {
+        this.x += num
         this.x1 += num
         this.x2 += num
         this.x3 += num

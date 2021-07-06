@@ -15,7 +15,8 @@ var context2 = canvas2.getContext('2d') as CanvasRenderingContext2D;
 context1.fillStyle = 'rgba(0, 0, 200, 0.5)'
 
 var gameRunning = true
-var ship = new Ship(canvas1.width,canvas1.height)
+var imageSrc = '../img/ship.svg'
+var ship = new Ship(canvas1.width,canvas1.height,imageSrc)
 var FPS = 3.5
 var oneSecond = 1000 //ms
 
