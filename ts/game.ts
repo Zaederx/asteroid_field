@@ -145,7 +145,6 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
         if (ship.health <= 0) {
             ship.crash = true
             gameOver()
-
         }
         if (debri.size < 25) {
             ship.crash = true

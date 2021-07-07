@@ -3,12 +3,19 @@ body {
     background-color: rgb(248, 239, 174);
 }
 #starry-bg-div {
-    background-image: url('../img/starry-background.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    // background-image: url('../img/starry-background.svg');
+    // background-repeat: no-repeat;
+    // background-size: cover;
     margin: 40px;
     height: 490px;
     width: 820px;
+}
+
+#video {
+    position: fixed;
+    height: 490px;
+    width: 820px;
+    z-index: -1;
 }
 
 .buttons {
@@ -26,4 +33,9 @@ body {
     padding-top: 30px;
     color: rgb(115, 115, 115);
     background-color: rgb(253, 207, 34);
+    cursor: pointer;
+}
+
+.buttons > div:hover {
+    background-color: rgb(253, 165, 34);
 }
