@@ -18,3 +18,15 @@
     left: 0;
     z-index: 0;
 }
+#pause-btn{
+    position: absolute;
+    top: 10px;
+    left: 400px;
+    width: 50px;
+    height: 50px;
+    z-index: 3;
+}
+
+#pause-btn:hover{
+    background-color: rgb(150, 80, 62);
+}

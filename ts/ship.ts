@@ -77,22 +77,27 @@ export class Ship {
         this.x3 += num
         this.x_mid += num
     }
-
+    steering = (event) => {
+        if(event.key == this.up){
+            this.moveYCoordinates(-20)
+        }
+        if(event.key == this.down) {
+            this.moveYCoordinates(+20)
+        }
+        if (event.key == this.left) {
+            this.moveXCoordinates(-20)
+        }
+        if (event.key == this.right) {
+            this.moveXCoordinates(+20)
+        }
+    }
     steerShip() {
-        document.addEventListener('keydown', (event) => {
-            if(event.key == this.up){
-                this.moveYCoordinates(-20)
-            }
-            if(event.key == this.down) {
-                this.moveYCoordinates(+20)
-            }
-            if (event.key == this.left) {
-                this.moveXCoordinates(-20)
-            }
-            if (event.key == this.right) {
-                this.moveXCoordinates(+20)
-            }
-        })
+        document.addEventListener('keydown', this.steering)
+    }
+    
+
+    disableSteering() {
+        document.removeEventListener('keydown', this.steering)
     }
 
 }

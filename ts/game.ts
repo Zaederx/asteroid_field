@@ -27,9 +27,7 @@ function drawBackground() {
 }
 
 
-//create backgorund canas
-
-var gameRunning = true
+var gameRunning = false
 var imageSrc = '../img/ship.svg'
 var ship = new Ship(canvas1.width,canvas1.height,imageSrc)
 // var canvas1FPS = 3.5
@@ -38,16 +36,14 @@ var debriGenerationSpeed = 1000//every x milliseconds
 var debriRepaintFPS = 20 //every x milliseconds
 var oneSecond = 1000 //ms
 var clock = new StopClock()
-clock.tick()
+
 /**
  * Updates canvas one - clearing screen for next repaint/drawing
  */
 function updateCanvas1() {
     context1?.clearRect(0,0,canvas1.width,canvas1.height)
     context3.drawImage(backgroundImage,0,0,canvas3.width,canvas3.height)
-    // context2?.clearRect(0,0,canvas2!.width,canvas2!.height)
     ship.drawShip(context1)
-    // clock.tick()
     displayTime(clock)
     updateShipScore()
     if (ship.health <= 0) {
@@ -71,6 +67,10 @@ async function displayTime(clock:StopClock) {
  */
 function enableShipSteering() {
     ship.steerShip()
+}
+
+function disableShipSteering() {
+    ship.disableSteering()
 }
 
 /**
@@ -159,30 +159,74 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
         
     }
 
+    //this sections stop when game is paused / not running so that debri positions is not altered during paused game time
     if(debri.x_mid >= offscreen && gameRunning) {
         setTimeout(() => {
             debri.alterXPosition(-20)
-            floatDebri(context,debri)
         },oneSecond/10)//how fast debri moves
         setTimeout(()=> {
             debri.drawDebri(context)
 
         }, oneSecond/(debriRepaintFPS))//how often redrawn/painted on screen
     }
+    setTimeout(() => {
+        floatDebri(context,debri)
+    },oneSecond/10)
+    
     
 }
 
+
+// **** Pause play functionality ****
+
+var pause_btn = document.querySelector('#pause-btn') as HTMLDivElement
+pause_btn ? pause_btn.onclick = () => togglePauseButton() : console.log('pause-btn is null')
+var play_btn_img = new Image()
+play_btn_img.src = '../img/play-btn.svg'
+var pause_btn_img = document.querySelector('#pause-btn-img') as HTMLImageElement
+
+function pauseGame() {
+    gameRunning = false;
+    clock.stopTicking()
+    disableShipSteering()
+    pause_btn_img.src = '../img/play-btn.svg'
+}
+
+function resumeGame() {
+    clock.tick()
+    runGame()
+    pause_btn_img.src = '../img/pause-btn.svg'
+}
+
+function togglePauseButton() {
+    if (gameRunning) {
+        console.log('pausing game')
+        pauseGame()
+    }
+    else {
+        console.log('resuming game')
+        resumeGame()
+    }
+}
+
+
+
+/**
+ * Ends game
+ */
 function gameOver() {
     gameRunning = false
     clock.stopTicking()
+    disableShipSteering()
 }
 
 /**
  * Calls all functions needed to run the game
  */
-function runGame() {
+ function runGame() {
     gameRunning = true
     // Game
+    clock.tick()
     drawBackground()
     updateCanvas1()
     enableShipSteering()
