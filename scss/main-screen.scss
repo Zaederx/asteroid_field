@@ -1,0 +1,29 @@
+
+body {
+    background-color: rgb(248, 239, 174);
+}
+#starry-bg-div {
+    background-image: url('../img/starry-background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 40px;
+    height: 490px;
+    width: 820px;
+}
+
+.buttons {
+    padding-top: 200px;
+}
+
+.buttons > div {
+    width: 300px;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 20px;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(115, 115, 115);
+    background-color: rgb(253, 207, 34);
+}
