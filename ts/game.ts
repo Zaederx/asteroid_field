@@ -6,21 +6,24 @@ var canvas1 = document.getElementById('canvas1') as HTMLCanvasElement
 var canvas2 = document.getElementById('canvas2') as HTMLCanvasElement
 canvas1.width = 918
 canvas1.height = 560
-var context1 = canvas1.getContext('2d') as CanvasRenderingContext2D;
 canvas2.width = 918
 canvas2.height = 560
 context1 ? context1.fillStyle = '#FF0000': console.error('context is null');
 
 
+var context1 = canvas1.getContext('2d') as CanvasRenderingContext2D;
 var context2 = canvas2.getContext('2d') as CanvasRenderingContext2D;
 context1.fillStyle = 'rgba(0, 0, 200, 0.5)'
+
+//create backgorund canas
 
 var gameRunning = true
 var imageSrc = '../img/ship.svg'
 var ship = new Ship(canvas1.width,canvas1.height,imageSrc)
 var canvas1FPS = 3.5
-var canvas2FPS = 3.5
-var debriGenerationSpeed = 1000//ms
+var canvas2FPS = 4.5
+var debriGenerationSpeed = 1000//every x milliseconds
+var debriRepaintFPS = 20 //every x milliseconds
 var oneSecond = 1000 //ms
 var clock = new StopClock()
 clock.tick()
@@ -31,7 +34,7 @@ function updateCanvas1() {
     context1?.clearRect(0,0,canvas1!.width,canvas1!.height)
     // context2?.clearRect(0,0,canvas2!.width,canvas2!.height)
     ship.drawShip(context1)
-    clock.tick()
+    // clock.tick()
     displayTime(clock)
     updateShipScore()
     if (ship.health <= 0) {
@@ -151,7 +154,7 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
         setTimeout(()=> {
             debri.drawDebri(context)
 
-        }, oneSecond/(canvas1FPS))//how often redrawn/painted on screen
+        }, oneSecond/(debriRepaintFPS))//how often redrawn/painted on screen
     }
     
 }
