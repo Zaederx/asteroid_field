@@ -19,8 +19,10 @@ export class Ship {
     x_mid:number;
     y_mid:number;
     image:any;
+    crashImage:any;
+    crash:boolean;
     
-    constructor(winWidth:number,winHeight:number,imgSrc?:string) {
+    constructor(winWidth:number,winHeight:number,imgSrc?:string, crashImgSrc?:string) {
         this.health = 50
         this.size = 50//100
         this.radius = (this.size/2) - ((this.size/2)/3)
@@ -43,7 +45,11 @@ export class Ship {
             this.image = new Image()
             this.image.src = imgSrc
         }
-        
+        if (crashImgSrc) {
+            this.crashImage = new Image()
+            this.crashImage.src = crashImgSrc
+        }
+        this.crash = false
     }
 
     drawShip(context:CanvasRenderingContext2D) {
@@ -59,6 +65,12 @@ export class Ship {
             context?.stroke()
             context?.lineTo(this.x1,this.y1)
             context?.stroke()
+        }
+    }
+
+    drawShipCollision(context:CanvasRenderingContext2D) {
+        if (this.crashImage) {
+            context.drawImage(this.crashImage,this.x,this.y,this.size,this.size)
         }
     }
 

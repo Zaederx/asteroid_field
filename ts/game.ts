@@ -29,7 +29,8 @@ function drawBackground() {
 
 var gameRunning = false
 var imageSrc = '../img/ship.svg'
-var ship = new Ship(canvas1.width,canvas1.height,imageSrc)
+var crashImgSrc = '../img/ship-crash.svg'
+var ship = new Ship(canvas1.width,canvas1.height,imageSrc,crashImgSrc)
 // var canvas1FPS = 3.5
 var canvas2FPS = 4.5
 var debriGenerationSpeed = 1000//every x milliseconds
@@ -43,7 +44,12 @@ var clock = new StopClock()
 function updateCanvas1() {
     context1?.clearRect(0,0,canvas1.width,canvas1.height)
     context3.drawImage(backgroundImage,0,0,canvas3.width,canvas3.height)
-    ship.drawShip(context1)
+    if(ship.crash == true){
+        ship.drawShipCollision(context1)
+    }
+    else {
+        ship.drawShip(context1)
+    }
     displayTime(clock)
     updateShipScore()
     if (ship.health <= 0) {
@@ -55,7 +61,6 @@ function updateCanvas1() {
 }
 
 async function displayTime(clock:StopClock) {
-
     var text = clock.getClockDisplay()
     var x = 500
     var y = 30
@@ -138,15 +143,24 @@ function floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
         console.log('Collision. Ship health:', ship.health)
         debri.collision = true
         if (ship.health <= 0) {
+            ship.crash = true
             gameOver()
+
         }
         if (debri.size < 25) {
+            ship.crash = true
             ship.health -= 2
+            ship.drawShipCollision(context)
         }
         else {
+            ship.crash = true
             ship.health -= 5
+            ship.drawShipCollision(context)
         }
         
+    }
+    else {
+        ship.crash = false
     }
 
     //this sections stop when game is paused / not running so that debri positions is not altered during paused game time
