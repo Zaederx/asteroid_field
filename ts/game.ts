@@ -1,26 +1,38 @@
 import { Debri } from "../js/debri"
 import { Ship } from "../js/ship"
-import { StopClock } from "../js/StopClock"
+import { StopClock } from "../js/stopClock"
 
 var canvas1 = document.getElementById('canvas1') as HTMLCanvasElement
 var canvas2 = document.getElementById('canvas2') as HTMLCanvasElement
+//background canvas
+var canvas3 = document.getElementById('canvas3') as HTMLCanvasElement
 canvas1.width = 918
-canvas1.height = 560
+canvas1.height = 570
 canvas2.width = 918
-canvas2.height = 560
-context1 ? context1.fillStyle = '#FF0000': console.error('context is null');
-
+canvas2.height = 570
+canvas3.width = 918
+canvas3.height = 570
 
 var context1 = canvas1.getContext('2d') as CanvasRenderingContext2D;
 var context2 = canvas2.getContext('2d') as CanvasRenderingContext2D;
-context1.fillStyle = 'rgba(0, 0, 200, 0.5)'
+var context3 = canvas3.getContext('2d') as CanvasRenderingContext2D;
+context1.fillStyle = 'rgb(200, 200, 200)'
+
+const backgroundImage = new Image()
+backgroundImage.src = '../img/starry-background.svg'
+function drawBackground() {
+    //Add Background
+    context3.drawImage(backgroundImage,0,0,canvas3.width,canvas3.height)
+    requestAnimationFrame(drawBackground)
+}
+
 
 //create backgorund canas
 
 var gameRunning = true
 var imageSrc = '../img/ship.svg'
 var ship = new Ship(canvas1.width,canvas1.height,imageSrc)
-var canvas1FPS = 3.5
+// var canvas1FPS = 3.5
 var canvas2FPS = 4.5
 var debriGenerationSpeed = 1000//every x milliseconds
 var debriRepaintFPS = 20 //every x milliseconds
@@ -31,7 +43,8 @@ clock.tick()
  * Updates canvas one - clearing screen for next repaint/drawing
  */
 function updateCanvas1() {
-    context1?.clearRect(0,0,canvas1!.width,canvas1!.height)
+    context1?.clearRect(0,0,canvas1.width,canvas1.height)
+    context3.drawImage(backgroundImage,0,0,canvas3.width,canvas3.height)
     // context2?.clearRect(0,0,canvas2!.width,canvas2!.height)
     ship.drawShip(context1)
     // clock.tick()
@@ -170,6 +183,7 @@ function gameOver() {
 function runGame() {
     gameRunning = true
     // Game
+    drawBackground()
     updateCanvas1()
     enableShipSteering()
     updateCanvas2()
