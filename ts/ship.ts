@@ -23,7 +23,7 @@ export class Ship {
     constructor(winWidth:number,winHeight:number,imgSrc?:string) {
         this.health = 50
         this.size = 50//100
-        this.radius = (this.size/2) - 5
+        this.radius = (this.size/2) - ((this.size/2)/3)
         this.x = 0
         this.y = winHeight/2
         this.x1 = 0 
