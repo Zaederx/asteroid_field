@@ -23,7 +23,7 @@ export class Ship {
     constructor(winWidth:number,winHeight:number,imgSrc?:string) {
         this.health = 50
         this.size = 50//100
-        this.radius = this.size/2
+        this.radius = (this.size/2) - 5
         this.x = 0
         this.y = winHeight/2
         this.x1 = 0 
@@ -91,11 +91,11 @@ export class Ship {
             this.moveXCoordinates(+20)
         }
     }
-    steerShip() {
+
+    enableSteering() {
         document.addEventListener('keydown', this.steering)
     }
     
-
     disableSteering() {
         document.removeEventListener('keydown', this.steering)
     }

@@ -62,16 +62,6 @@ async function displayTime(clock:StopClock) {
     context1.font = '30px Arial'
     context1.fillText(text,x,y)
 }
-/**
- * Enables ship scores
- */
-function enableShipSteering() {
-    ship.steerShip()
-}
-
-function disableShipSteering() {
-    ship.disableSteering()
-}
 
 /**
  * Update Ship Score
@@ -188,12 +178,11 @@ var pause_btn_img = document.querySelector('#pause-btn-img') as HTMLImageElement
 function pauseGame() {
     gameRunning = false;
     clock.stopTicking()
-    disableShipSteering()
+    ship.disableSteering()
     pause_btn_img.src = '../img/play-btn.svg'
 }
 
 function resumeGame() {
-    clock.tick()
     runGame()
     pause_btn_img.src = '../img/pause-btn.svg'
 }
@@ -217,7 +206,7 @@ function togglePauseButton() {
 function gameOver() {
     gameRunning = false
     clock.stopTicking()
-    disableShipSteering()
+    ship.disableSteering()
 }
 
 /**
@@ -229,7 +218,7 @@ function gameOver() {
     clock.tick()
     drawBackground()
     updateCanvas1()
-    enableShipSteering()
+    ship.enableSteering()
     updateCanvas2()
     generateDebri()
 }
