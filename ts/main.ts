@@ -16,7 +16,7 @@ function createWindow() {
         }
     })
 
-    window.loadFile('html/main-screen.html')
+    window.loadFile('html/main-menu.html')
 
     if (process.env.NODE_ENV == 'dev-tools'){
         window.webContents.openDevTools()
@@ -52,8 +52,8 @@ ipcMain.handle('options', () => {
     return message
 })
 
-ipcMain.handle('main-screen', () => {
-    window.loadFile('html/main-screen.html')
-    var message = 'main-screen.html loaded'
+ipcMain.handle('main-menu', () => {
+    window.loadFile('html/main-menu.html')
+    var message = 'main-menu.html loaded'
     return message
 })
