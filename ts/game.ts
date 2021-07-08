@@ -1,3 +1,4 @@
+import { ipcRenderer } from "electron"
 import { Debri } from "../js/debri"
 import { Ship } from "../js/ship"
 import { StopClock } from "../js/stopClock"
@@ -222,13 +223,30 @@ function gameOver() {
     ship.disableSteering()
     playLoseMusic()
     pauseGamePlayMusic()
-    
+    toMainMenu()
 }
+
+
+var options = document.querySelector('#options') as HTMLDivElement
+options.style.display = 'none'
+
+function toMainMenu() {
+    options.style.display = 'block'
+}
+
+var main_menu_btn = document.querySelector('#main-menu') as HTMLDivElement
+
+main_menu_btn ? main_menu_btn.onclick = () => clickMainMenuBtn() : console.error('main-menu btn is null')
+function clickMainMenuBtn() {
+    var message = ipcRenderer.invoke('main-menu')
+    console.log(message)
+}
+
 
 /**
  * Calls all functions needed to run the game
  */
- function runGame() {
+ export function runGame() {
     gameRunning = true
     // Game
     clock.tick()
