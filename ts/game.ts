@@ -3,10 +3,11 @@ import { Debri } from "../js/debri"
 import { Ship } from "../js/ship"
 import { StopClock } from "../js/stopClock"
 
+//canvases & contexts
 var canvas1 = document.getElementById('canvas1') as HTMLCanvasElement
 var canvas2 = document.getElementById('canvas2') as HTMLCanvasElement
-//background canvas
 var canvas3 = document.getElementById('canvas3') as HTMLCanvasElement
+
 canvas1.width = 918
 canvas1.height = 570
 canvas2.width = 918
@@ -14,33 +15,46 @@ canvas2.height = 570
 canvas3.width = 918
 canvas3.height = 570
 
-var context1 = canvas1.getContext('2d') as CanvasRenderingContext2D;
-var context2 = canvas2.getContext('2d') as CanvasRenderingContext2D;
-var context3 = canvas3.getContext('2d') as CanvasRenderingContext2D;
+
+
+var context1 = canvas1.getContext('2d') as CanvasRenderingContext2D;//ship canvas
+var context2 = canvas2.getContext('2d') as CanvasRenderingContext2D;//debri canvas
+var context3 = canvas3.getContext('2d') as CanvasRenderingContext2D;//background canvas
+
+//context1 fillStyle
 context1.fillStyle = 'rgb(200, 200, 200)'
 
-const backgroundImage = new Image()
+//Images
+var backgroundImage = new Image()
 backgroundImage.src = '../img/starry-background.svg'
+var imageSrc = '../img/ship.svg'
+var crashImgSrc = '../img/ship-crash.svg'
+
+//Create new ship
+var ship = new Ship(canvas1.width,canvas1.height,imageSrc,crashImgSrc)
+
+//FramesPerSecond
+var canvas2FPS = 4.5 //for debri canvas
+var debriGenerationSpeed = 1000//every x milliseconds
+var debriRepaintFPS = 20 //every x milliseconds
+var oneSecond = 1000 //ms
+
+//Game is Running & stopClock
+var gameRunning = false
+var clock = new StopClock()
+
+
+/**
+ * Draws the background image on canvas3
+ */
 function drawBackground() {
     //Add Background
     context3.drawImage(backgroundImage,0,0,canvas3.width,canvas3.height)
     requestAnimationFrame(drawBackground)
 }
 
-
-var gameRunning = false
-var imageSrc = '../img/ship.svg'
-var crashImgSrc = '../img/ship-crash.svg'
-var ship = new Ship(canvas1.width,canvas1.height,imageSrc,crashImgSrc)
-// var canvas1FPS = 3.5
-var canvas2FPS = 4.5
-var debriGenerationSpeed = 1000//every x milliseconds
-var debriRepaintFPS = 20 //every x milliseconds
-var oneSecond = 1000 //ms
-var clock = new StopClock()
-
 /**
- * Updates canvas one - clearing screen for next repaint/drawing
+ * Updates canvas1 - clearing screen for next repaint/drawing of ship and stopClock
  */
 function updateCanvas1() {
     context1?.clearRect(0,0,canvas1.width,canvas1.height)
@@ -61,6 +75,10 @@ function updateCanvas1() {
     }
 }
 
+/**
+ * Displays stopClock time on canvas1
+ * @param clock stopClock to be displayed
+ */
 async function displayTime(clock:StopClock) {
     var text = clock.getClockDisplay()
     var x = 500
@@ -70,7 +88,7 @@ async function displayTime(clock:StopClock) {
 }
 
 /**
- * Update Ship Score
+ * Update Ship Score on canvas1
  */
 function updateShipScore() {
     var text = "Ship Health:"+ship.health
@@ -81,14 +99,14 @@ function updateShipScore() {
 }
 
 /**
- * Clear Canvas 2
+ * Clears canvas2
  */
 function clearCanvas2() {
     context2.clearRect(0,0, canvas2.width,canvas2.height)
 }
 
 /**
- * Update Canvas2 - clearing it for new drawings one a frame
+ * Update canvas2 - clearing it for new drawings of debri once a frame
  */
 function updateCanvas2() {
     clearCanvas2()
@@ -115,7 +133,6 @@ function generateDebri() {
     },debriGenerationSpeed)//how often debri is generated - in ms
 }
 
-
 /**
  * Returns the distance between a ship and debri
  * @param xDelta - the difference in x coordinates between ship and debri
@@ -126,6 +143,7 @@ function pythagoras(xDelta:number,yDelta:number):number {
     var distance = (xDelta**2 + yDelta**2)**0.5
     return distance
 }
+
 /**
  * Floats debri on canvas along the x axis towards x=0 (left side of screen)
  * @param context CanvasRendinerContext2D
@@ -227,15 +245,15 @@ function gameOver() {
 }
 
 
+// *** For Menu Button back to main menu ***
+
 var options = document.querySelector('#options') as HTMLDivElement
 options.style.display = 'none'
-
 function toMainMenu() {
     options.style.display = 'block'
 }
 
 var main_menu_btn = document.querySelector('#main-menu') as HTMLDivElement
-
 main_menu_btn ? main_menu_btn.onclick = () => clickMainMenuBtn() : console.error('main-menu btn is null')
 function clickMainMenuBtn() {
     var message = ipcRenderer.invoke('main-menu')
