@@ -220,6 +220,9 @@ function gameOver() {
     gameRunning = false
     clock.stopTicking()
     ship.disableSteering()
+    playLoseMusic()
+    pauseGamePlayMusic()
+    
 }
 
 /**
@@ -240,3 +243,17 @@ function gameOver() {
 runGame()
 
 
+//** Audio **/
+var gamePlayMusic = document.querySelector('#game-play-music') as HTMLAudioElement
+var loseGameMusic = document.querySelector('#lose-music') as HTMLAudioElement
+function pauseGamePlayMusic() {
+    gamePlayMusic.loop = false
+    gamePlayMusic.pause()
+}
+function playLoseMusic() {
+    loseGameMusic.play()
+}
+
+function pauseLoseMusic() {
+    loseGameMusic.pause()
+}

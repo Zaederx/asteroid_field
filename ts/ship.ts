@@ -23,7 +23,7 @@ export class Ship {
     crash:boolean;
     
     constructor(winWidth:number,winHeight:number,imgSrc?:string, crashImgSrc?:string) {
-        this.health = 50
+        this.health = 4
         this.size = 50//100
         this.radius = (this.size/2) - ((this.size/2)/3)
         this.x = 0
