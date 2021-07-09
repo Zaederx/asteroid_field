@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain} from 'electron';
+import {app, BrowserWindow, ipcMain, ipcRenderer} from 'electron';
 
 let window:BrowserWindow;
 
@@ -16,7 +16,7 @@ function createWindow() {
         }
     })
 
-    window.loadFile('html/game.html')
+    window.loadFile('html/main-menu.html')
 
     if (process.env.NODE_ENV == 'dev-tools'){
         window.webContents.openDevTools()
@@ -38,4 +38,22 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
+})
+
+ipcMain.handle('new-game', () => {
+    window.loadFile('html/game.html')
+    var message = 'game.html loaded'
+    return message
+})
+
+ipcMain.handle('options', () => {
+    window.loadFile('html/options.html')
+    var message = 'options.html loaded'
+    return message
+})
+
+ipcMain.handle('main-menu', () => {
+    window.loadFile('html/main-menu.html')
+    var message = 'main-menu.html loaded'
+    return message
 })

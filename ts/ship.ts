@@ -18,11 +18,14 @@ export class Ship {
     radius:number;
     x_mid:number;
     y_mid:number;
-
-    constructor(winWidth:number,winHeight:number) {
-        this.health = 50
+    image:any;
+    crashImage:any;
+    crash:boolean;
+    
+    constructor(winWidth:number,winHeight:number,imgSrc?:string, crashImgSrc?:string) {
+        this.health = 4
         this.size = 50//100
-        this.radius = this.size/2
+        this.radius = (this.size/2) - ((this.size/2)/3)
         this.x = 0
         this.y = winHeight/2
         this.x1 = 0 
@@ -38,20 +41,41 @@ export class Ship {
         this.right = 'ArrowRight' || 'Right'
         this.x_mid = this.size/2 + this.x1
         this.y_mid = this.size/2 + this.y1
+        if (imgSrc) {
+            this.image = new Image()
+            this.image.src = imgSrc
+        }
+        if (crashImgSrc) {
+            this.crashImage = new Image()
+            this.crashImage.src = crashImgSrc
+        }
+        this.crash = false
     }
 
     drawShip(context:CanvasRenderingContext2D) {
-        context?.beginPath()
-        context?.moveTo(this.x1,this.y1)
-        context?.lineTo(this.x2, this.y2)
-        context?.stroke()
-        context?.lineTo(this.x3, this.y3)
-        context?.stroke()
-        context?.lineTo(this.x1,this.y1)
-        context?.stroke()
+        if (this.image) {
+            context.drawImage(this.image,this.x,this.y,this.size,this.size)
+        }
+        else {
+            context?.beginPath()
+            context?.moveTo(this.x1,this.y1)
+            context?.lineTo(this.x2, this.y2)
+            context?.stroke()
+            context?.lineTo(this.x3, this.y3)
+            context?.stroke()
+            context?.lineTo(this.x1,this.y1)
+            context?.stroke()
+        }
+    }
+
+    drawShipCollision(context:CanvasRenderingContext2D) {
+        if (this.crashImage) {
+            context.drawImage(this.crashImage,this.x,this.y,this.size,this.size)
+        }
     }
 
     moveYCoordinates(num:number) {
+        this.y += num
         this.y1 += num
         this.y2 += num
         this.y3 += num
@@ -59,27 +83,33 @@ export class Ship {
     }
 
     moveXCoordinates(num:number) {
+        this.x += num
         this.x1 += num
         this.x2 += num
         this.x3 += num
         this.x_mid += num
     }
+    steering = (event) => {
+        if(event.key == this.up){
+            this.moveYCoordinates(-20)
+        }
+        if(event.key == this.down) {
+            this.moveYCoordinates(+20)
+        }
+        if (event.key == this.left) {
+            this.moveXCoordinates(-20)
+        }
+        if (event.key == this.right) {
+            this.moveXCoordinates(+20)
+        }
+    }
 
-    steerShip() {
-        document.addEventListener('keydown', (event) => {
-            if(event.key == this.up){
-                this.moveYCoordinates(-20)
-            }
-            if(event.key == this.down) {
-                this.moveYCoordinates(+20)
-            }
-            if (event.key == this.left) {
-                this.moveXCoordinates(-20)
-            }
-            if (event.key == this.right) {
-                this.moveXCoordinates(+20)
-            }
-        })
+    enableSteering() {
+        document.addEventListener('keydown', this.steering)
+    }
+    
+    disableSteering() {
+        document.removeEventListener('keydown', this.steering)
     }
 
 }

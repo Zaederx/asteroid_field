@@ -60,40 +60,40 @@ export class Game {
     loseGameMusic = document.querySelector('#lose-music') as HTMLAudioElement
 
     constructor(level:number,c1:HTMLCanvasElement,c2:HTMLCanvasElement,c3:HTMLCanvasElement) {
-        this.setGameLevel(level)
-        
-        // this.canvas1 = c1//ship canvas
-        // this.canvas2 = c2//debri canvas
-        // this.canvas3 = c3//background canva
-        // this.context1 = c1.getContext('2d') as CanvasRenderingContext2D
-        // this.context2 = c2.getContext('2d') as CanvasRenderingContext2D
-        // this.context3 = c3.getContext('2d') as CanvasRenderingContext2D
-        
+        this.canvas1 = c1
+        this.canvas2 = c2
+        this.canvas3 = c3
+        this.canvas1.width = 918
+        this.canvas1.height = 570
+        this.canvas2.width = 918
+        this.canvas2.height = 570
+        this.canvas3.width = 918
+        this.canvas3.height = 570
         this.backgroundImage.src = '../img/starry-background.svg'
         //context1 fillStyle
         this.context1.fillStyle = 'rgb(200, 200, 200)'
-        this.ship = new Ship(c1.width,c1.height,this.imageSrc,this.crashImgSrc)
         this.pause_btn ? this.pause_btn.onclick = () => this.togglePauseButton() : console.log('pause-btn is null')
         this.play_btn_img.src = '../img/play-btn.svg'  
         this.options.style.display = 'none'
         this.main_menu_btn ? this.main_menu_btn.onclick = () => this.clickMainMenuBtn() : console.error('main-menu btn is null')
-        
+        this.ship = new Ship(c1.width,c1.height,this.imageSrc,this.crashImgSrc)
+        this.setGameLevel(level)
     }
 
     /**
  * Draws the background image on canvas3
  */
-    drawBackground(context3) {
+    drawBackground() {
         //Add Background
-        context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
-        requestAnimationFrame.bind(this.drawBackground)
+        this.context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
+        requestAnimationFrame(() => {this.drawBackground})
     }
 
     /**
  * Updates canvas1 - clearing screen for next repaint/drawing of ship and stopClock
  */
-    updateCanvas1(context1) {
-        context1?.clearRect(0,0,this.canvas1.width,this.canvas1.height)
+    updateCanvas1() {
+        this.context1.clearRect(0,0,this.canvas1.width,this.canvas1.height)
         this.context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
         if(this.ship.crash == true){
             this.ship.drawShipCollision(this.context1)
@@ -107,7 +107,7 @@ export class Game {
             this.gameOver()
         }
         if(this.gameRunning) {
-            requestAnimationFrame(this.updateCanvas1)
+            requestAnimationFrame(() => {this.updateCanvas1})
         }
     }
 
@@ -288,9 +288,8 @@ export class Game {
         this.gameRunning = true
         // Game
         this.clock.tick()
-        this.drawBackground.bind(this.context3)
-        this.updateCanvas1.bind(this.context1)
-        // requestAnimationFrame.bind(this.updateCanvas1)
+        this.drawBackground.bind(this)
+        this.updateCanvas1.bind(this)
         this.ship.enableSteering()
         this.updateCanvas2()
         this.generateDebri()
@@ -302,18 +301,18 @@ export class Game {
     setGameLevel(level:number) {
         this.gameLevel = level
         if (this.gameLevel == 0) {
-            this.shipHealth = 50
+            this.ship.health = 50
             this.debriSize  = 40
             this.debriGenerationSpeed = 1000
         }
         else if (this.gameLevel == 1) {
-            this.shipHealth = 40
+            this.ship.health = 40
             this.debriSize = 50
             this.debriGenerationSpeed = 800
         
         }
         else if (this.gameLevel == 2) {
-            this.shipHealth = 30
+            this.ship.health = 30
             this.debriSize = 80
             this.debriGenerationSpeed = 700
         }

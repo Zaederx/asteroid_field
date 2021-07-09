@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <script type="module" src="../js/game.js" defer></script>
-     -->
-    <script type="module" src="../js/test.js"></script>
+    <script type="module" src="../js/run.js" defer></script>
+    <script type="module" src="../js/game.js" defer></script>
     <script type="module" src="../js/debri.js" defer></script>
     <script type="module" src="../js/ship.js" defer></script>
     <script type="module" src="../js/run.js" defer></script>
@@ -19,9 +18,23 @@
 </head>
 <body>
     <canvas id="canvas1" style="border:1px solid #9eaaa2;">
+
     </canvas>
 
     <canvas id="canvas2">
     </canvas>
+
+    <canvas id="canvas3">
+    </canvas>
+
+    <div id="pause-btn">
+        <img id="pause-btn-img" src="../img/pause-btn.svg" alt="play-pause-btn">
+    </div>
+    <audio id="game-play-music" autoplay loop src="../sound/asteroid_field_gameplay_music.mp3"></audio>
+    <audio id="lose-music" src="../sound/asteroid_field_game_lose_music.mp3"></audio>
+
+    <div id="options">
+        <div id="main-menu">Main Menu</div>
+    </div>
 </body>
 </html>
