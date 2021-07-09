@@ -1,5 +1,9 @@
 # asteroid_field
  Asteriod Field Game
+ 
+ Instruction on how to run the game:
+ - open up in the terminal and then type:
+ `npm start`
 
 ## Game MVP
 The first playable version of the game - Minimum Viable Product
