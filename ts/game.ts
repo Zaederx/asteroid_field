@@ -87,8 +87,8 @@ export class Game {
         console.log('context3.width:',this.canvas3.width)
         //Add Background
         this.context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
-        setInterval(() => this.drawBackground(),1000/this.canvas3FPS)
-        // requestAnimationFrame(() => {this.drawBackground})
+        // setInterval(() => this.drawBackground(),1000/this.canvas3FPS)
+        requestAnimationFrame(() => {this.drawBackground()})
     }
 
     /**
@@ -110,7 +110,7 @@ export class Game {
         }
         if(this.gameRunning) {
             // setInterval(() => this.updateCanvas1(), 1000/this.canvas1FPS)
-            requestAnimationFrame(this.updateCanvas1)
+            requestAnimationFrame(() => this.updateCanvas1())
         }
     }
 
@@ -294,8 +294,8 @@ export class Game {
         this.drawBackground()
         this.updateCanvas1()
         this.ship.enableSteering()
-        // this.updateCanvas2()
-        // this.generateDebri()
+        this.updateCanvas2()
+        this.generateDebri()
     }
 
 
