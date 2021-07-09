@@ -305,22 +305,22 @@ export class Game {
     setGameLevel(level:number) {
         this.gameLevel = level
         if (this.gameLevel == 0) {
-            this.ship.health = 50
-            this.debriSize  = 40
-            this.debriGenerationSpeed = 1000
-            this.debriFloatingFPS = 10
-        }
-        else if (this.gameLevel == 1) {
-            this.ship.health = 40
-            this.debriSize = 50
-            this.debriGenerationSpeed = 800
-            this.debriFloatingFPS = 20
-        }
-        else if (this.gameLevel == 2) {
             this.ship.health = 30
             this.debriSize = 80
             this.debriGenerationSpeed = 700 //every x milliseconds
             this.debriFloatingFPS = 30 //1000/debriFloatingFPS
+        }
+        else if (this.gameLevel == 1) {
+            this.ship.health = 30
+            this.debriSize = 100
+            this.debriGenerationSpeed = 500 //every x milliseconds
+            this.debriFloatingFPS = 40 //1000/debriFloatingFPS
+        }
+        else if (this.gameLevel == 2) {
+            this.ship.health = 30
+            this.debriSize = 200
+            this.debriGenerationSpeed = 300 //every x milliseconds
+            this.debriFloatingFPS = 20 //1000/debriFloatingFPS
         }
 }
 
