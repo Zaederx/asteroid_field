@@ -68,11 +68,11 @@ export class Game {
 
     constructor(level:number) {
         this.canvas1.width = 918
-        this.canvas1.height = 570
+        this.canvas1.height = 575
         this.canvas2.width = 918
-        this.canvas2.height = 570
+        this.canvas2.height = 575
         this.canvas3.width = 918
-        this.canvas3.height = 570
+        this.canvas3.height = 575
         this.backgroundImage.src = '../img/starry-background.svg'
         //context1 fillStyle
         this.context1.fillStyle = 'rgb(200, 200, 200)'
@@ -88,7 +88,7 @@ export class Game {
      * Draws the background image on canvas3
      */
     drawBackground() {
-        console.log('context3.width:',this.canvas3.width)
+        // console.log('context3.width:',this.canvas3.width)
         //Add Background
         this.context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
         // setInterval(() => this.drawBackground(),1000/this.canvas3FPS)
@@ -99,6 +99,7 @@ export class Game {
      * Updates canvas1 - clearing screen for next repaint/drawing of ship and stopClock
      */
     updateCanvas1() {
+        this.ship.print()
         this.context1.clearRect(0,0,this.canvas1.width,this.canvas1.height)
         this.context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
         if(this.ship.crash == true){
@@ -163,7 +164,7 @@ export class Game {
      * Generates debri on screen
      */
     generateDebri() {
-        console.log('generating debri')
+        // console.log('generating debri')
         var imgSrc = '../img/asteroid.svg'
         var debri = new Debri(this.canvas2.width,this.canvas2.height, imgSrc, this.debriSize)
         debri.drawDebri(this.context2)
@@ -193,7 +194,7 @@ export class Game {
      */
     floatDebri(context:CanvasRenderingContext2D,debri:Debri) {
         
-        console.log('floating debri')
+        // console.log('floating debri')
         var offscreen:number = (0 - debri.size)
         var x = this.ship.x_mid - debri.x_mid
         var y = this.ship.y_mid - debri.y_mid
@@ -201,7 +202,7 @@ export class Game {
         var distance = this.pythagoras(x,y)
         var allowedDistance = this.ship.radius + debri.radius
         if (debri.collision == false && distance <= allowedDistance) {
-            console.log('Collision. Ship health:', this.ship.health)
+            // console.log('Collision. Ship health:', this.ship.health)
             debri.collision = true
             if (this.ship.health <= 0) {
                 this.ship.crash = true
