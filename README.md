@@ -10,13 +10,8 @@
 * [Background](#background)
 * [Images](#images)
 * [Technologies](#technologies)
-* [Requirements to run the project](#requirements-to-run-the-project)
-* [Setup](#setup)
-* [Running the project](#running-the-project)
-* [Project Shortcomings](#shortcomings)
-* [Modifications](#modifications)
-* [Trello Board](https://trello.com/b/e8hwRTpR/patientapp)
-* [Video Walkthrough - Youtube](https://www.youtube.com/watch?v=2LTY80dYC0g)
+* [Requirements to run the project](#running-the-project)
+
 
 ## Videos
 ### Game MVP
@@ -39,3 +34,7 @@ Technologies used in this project were:
 - SASS/CSS
 - TypeScript/JavaScript
 - Node + Electron
+
+### Running the project
+You will need to have Node.js installed. You then just need to `cd` to the project folder in the termainl and type:
+`npm install`
