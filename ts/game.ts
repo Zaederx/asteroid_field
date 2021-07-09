@@ -3,6 +3,9 @@ import { Debri } from "../js/debri"
 import { Ship } from "../js/ship"
 import { StopClock } from "../js/stopClock"
 
+/**
+ * Class to represent the Game
+ */
 export class Game {
     //** Game Settings */
     gameLevel = 0
@@ -10,6 +13,7 @@ export class Game {
     debriSize = 0
     debriGenerationSpeed = 0//every x milliseconds
     debriFloatingFPS = 0
+
 
     //Main Game Variable
 
@@ -77,8 +81,7 @@ export class Game {
         this.options.style.display = 'none'
         this.main_menu_btn ? this.main_menu_btn.onclick = () => this.clickMainMenuBtn() : console.error('main-menu btn is null')
         this.ship = new Ship(this.canvas1.width,this.canvas1.height,this.imageSrc,this.crashImgSrc)
-        this.setGameLevel(level)
-
+        this.setGameLevel(level) //sets game setting objects
     }
 
     /**
@@ -236,6 +239,9 @@ export class Game {
     }
 
 
+    /**
+     * Pause Game
+     */
     pauseGame() {
         this.gameRunning = false;
         this.clock.stopTicking()
@@ -243,11 +249,17 @@ export class Game {
         this.pause_btn_img.src = '../img/play-btn.svg'
     }
     
+    /**
+     * Resume Game
+     */
     resumeGame() {
         this.runGame()
         this.pause_btn_img.src = '../img/pause-btn.svg'
     }
     
+    /**
+     * Toggles pause button
+     */
     togglePauseButton() {
         if (this.gameRunning) {
             console.log('pausing game')
@@ -260,9 +272,9 @@ export class Game {
     }
 
     
-/**
- * Ends game
- */
+    /**
+     * Ends game
+     */
     gameOver() {
         this.gameRunning = false
         this.clock.stopTicking()
@@ -272,22 +284,26 @@ export class Game {
         this.toMainMenu()
     }
 
-
-
+    /**
+     * Displays Back to Main Menu button when
+     * game is lost
+     */
     toMainMenu() {
         this.options.style.display = 'block'
     }
 
-
+    /**
+     * Click Main Menu Button
+     */
     clickMainMenuBtn() {
         var message = ipcRenderer.invoke('main-menu')
         console.log(message)
     }
 
 
-/**
- * Calls all functions needed to run the game
- */
+    /**
+     * Calls all functions needed to run the game
+     */
     runGame() {
         this.gameRunning = true
         // Game
@@ -322,16 +338,26 @@ export class Game {
             this.debriGenerationSpeed = 300 //every x milliseconds
             this.debriFloatingFPS = 20 //1000/debriFloatingFPS
         }
-}
+    }
 
+    /**
+     * Plays game music
+     */
     pauseGamePlayMusic() {
         this.gamePlayMusic.loop = false
         this.gamePlayMusic.pause()
     }
+
+    /**
+     * Plays losing music
+     */
     playLoseMusic() {
         this.loseGameMusic.play()
     }
 
+    /**
+     * Pauses losing music
+     */
     pauseLoseMusic() {
         this.loseGameMusic.pause()
     }
