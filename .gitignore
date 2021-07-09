@@ -79,3 +79,4 @@ typings/
 
 # FuseBox cache
 .fusebox/
+json/gameLevel.json
