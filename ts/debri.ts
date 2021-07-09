@@ -10,12 +10,19 @@ export class Debri {
     static count:number = 0
     image:any
     
-    constructor(screenWidth:number, screenHeight:number, imgSrc?:string) {
+    constructor(screenWidth:number, screenHeight:number, imgSrc?:string,size?:number) {
         // Coordinates and size
         this.x = Math.random() * (screenWidth/2) +(screenWidth/2)  //random number between 275 and 550
         //generate beyond halfway point of screen to give ship time to react
         this.y = Math.random() * screenHeight// between 1 and 900
-        this.size = Math.random() * 40 + 10// 10 - 50
+
+        if(size) {
+            this.size = Math.random() * size + 10// 10 - size
+        }
+        else {
+            this.size = Math.random() * 40 + 10// 10 - 50
+        }
+
         this.radius = this.size/2
         // Debri mid point
         this.x_mid = this.x + (this.size/2)

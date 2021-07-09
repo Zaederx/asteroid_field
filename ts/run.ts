@@ -1,12 +1,16 @@
-import { Game } from '../js/game'
+import { ipcRenderer } from "electron";
+import { Game } from "../js/game";
 
-window.onload = () => {
-    // var canvas1 = document.getElementById('canvas1') as HTMLCanvasElement
-    // var canvas2 = document.getElementById('canvas2') as HTMLCanvasElement
-    // var canvas3 = document.getElementById('canvas3') as HTMLCanvasElement
-    
-    
-
-    var game = new Game(0)
+declare var gameLevel:number;
+window.onload = async () => {
+    var levelStr:string = await ipcRenderer.invoke('game-level-retrieve')
+    var level = parseInt(levelStr)
+    console.warn('run - gameLevel:',level)
+    var game = new Game(level)
     game.runGame()
 }
+
+
+
+
+

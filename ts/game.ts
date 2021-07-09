@@ -9,6 +9,7 @@ export class Game {
     shipHealth = 0
     debriSize = 0
     debriGenerationSpeed = 0//every x milliseconds
+    debriFloatingFPS = 0
 
     //Main Game Variable
 
@@ -62,7 +63,6 @@ export class Game {
     loseGameMusic = document.querySelector('#lose-music') as HTMLAudioElement
 
     constructor(level:number) {
-        
         this.canvas1.width = 918
         this.canvas1.height = 570
         this.canvas2.width = 918
@@ -78,11 +78,12 @@ export class Game {
         this.main_menu_btn ? this.main_menu_btn.onclick = () => this.clickMainMenuBtn() : console.error('main-menu btn is null')
         this.ship = new Ship(this.canvas1.width,this.canvas1.height,this.imageSrc,this.crashImgSrc)
         this.setGameLevel(level)
+
     }
 
     /**
- * Draws the background image on canvas3
- */
+     * Draws the background image on canvas3
+     */
     drawBackground() {
         console.log('context3.width:',this.canvas3.width)
         //Add Background
@@ -92,8 +93,8 @@ export class Game {
     }
 
     /**
- * Updates canvas1 - clearing screen for next repaint/drawing of ship and stopClock
- */
+     * Updates canvas1 - clearing screen for next repaint/drawing of ship and stopClock
+     */
     updateCanvas1() {
         this.context1.clearRect(0,0,this.canvas1.width,this.canvas1.height)
         this.context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
@@ -144,8 +145,8 @@ export class Game {
     }
 
     /**
- * Update canvas2 - clearing it for new drawings of debri once a frame
- */
+     * Update canvas2 - clearing it for new drawings of debri once a frame
+     */
     updateCanvas2() {
         this.clearCanvas2()
         setTimeout(() => {
@@ -161,7 +162,7 @@ export class Game {
     generateDebri() {
         console.log('generating debri')
         var imgSrc = '../img/asteroid.svg'
-        var debri = new Debri(this.canvas2.width,this.canvas2.height, imgSrc)
+        var debri = new Debri(this.canvas2.width,this.canvas2.height, imgSrc, this.debriSize)
         debri.drawDebri(this.context2)
         this.floatDebri(this.context2,debri)
         setTimeout(()=> {
@@ -307,20 +308,21 @@ export class Game {
             this.ship.health = 50
             this.debriSize  = 40
             this.debriGenerationSpeed = 1000
+            this.debriFloatingFPS = 10
         }
         else if (this.gameLevel == 1) {
             this.ship.health = 40
             this.debriSize = 50
             this.debriGenerationSpeed = 800
-        
+            this.debriFloatingFPS = 20
         }
         else if (this.gameLevel == 2) {
             this.ship.health = 30
             this.debriSize = 80
-            this.debriGenerationSpeed = 700
+            this.debriGenerationSpeed = 700 //every x milliseconds
+            this.debriFloatingFPS = 30 //1000/debriFloatingFPS
         }
 }
-
 
     pauseGamePlayMusic() {
         this.gamePlayMusic.loop = false

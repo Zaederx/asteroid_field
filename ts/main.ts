@@ -1,5 +1,5 @@
 import {app, BrowserWindow, ipcMain, ipcRenderer} from 'electron';
-
+import * as fs from 'fs'
 let window:BrowserWindow;
 
 function createWindow() {
@@ -57,3 +57,39 @@ ipcMain.handle('main-menu', () => {
     var message = 'main-menu.html loaded'
     return message
 })
+
+ipcMain.handle('game-level-persist', (event, gameLevel) => {
+    persistGameLevel(gameLevel)
+})
+
+ipcMain.handle('game-level-retrieve', async (event, gameLevel) => {
+   var level = await retrieveGameLevel()
+   return level
+})
+
+function persistGameLevel(level:number) {
+    var path = 'json/gameLevel.json'
+
+    try{
+        fs.promises.writeFile(path,level.toString())
+    }
+    catch(error) {
+        console.error(error)
+    }
+    
+}
+
+async function retrieveGameLevel():Promise<number> {
+    var path = 'json/gameLevel.json'
+    var gameLevel:number = 0;
+    try{
+        var data:string = await fs.promises.readFile(path,'utf-8')
+        gameLevel = parseInt(data)
+        return gameLevel;
+    }
+    catch(error) {
+        console.error(error)
+    }
+    return gameLevel
+}
+
