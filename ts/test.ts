@@ -51,7 +51,7 @@ function displayDistanceToDebri() {
  * Enables ship scores
  */
 function enableShipSteering() {
-    ship.steerShip()
+    ship.enableSteering()
 }
 
 /**

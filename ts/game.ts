@@ -35,7 +35,9 @@ export class Game {
     ship:Ship
 
     //FramesPerSecond
+    canvas1FPS = 60
     canvas2FPS = 4.5 //for debri canvas
+    canvas3FPS = 4.5 //for debri canvas
     debriRepaintFPS = 20 //every x milliseconds
     oneSecond = 1000 //ms
 
@@ -59,10 +61,8 @@ export class Game {
     gamePlayMusic = document.querySelector('#game-play-music') as HTMLAudioElement
     loseGameMusic = document.querySelector('#lose-music') as HTMLAudioElement
 
-    constructor(level:number,c1:HTMLCanvasElement,c2:HTMLCanvasElement,c3:HTMLCanvasElement) {
-        this.canvas1 = c1
-        this.canvas2 = c2
-        this.canvas3 = c3
+    constructor(level:number) {
+        
         this.canvas1.width = 918
         this.canvas1.height = 570
         this.canvas2.width = 918
@@ -76,7 +76,7 @@ export class Game {
         this.play_btn_img.src = '../img/play-btn.svg'  
         this.options.style.display = 'none'
         this.main_menu_btn ? this.main_menu_btn.onclick = () => this.clickMainMenuBtn() : console.error('main-menu btn is null')
-        this.ship = new Ship(c1.width,c1.height,this.imageSrc,this.crashImgSrc)
+        this.ship = new Ship(this.canvas1.width,this.canvas1.height,this.imageSrc,this.crashImgSrc)
         this.setGameLevel(level)
     }
 
@@ -84,9 +84,11 @@ export class Game {
  * Draws the background image on canvas3
  */
     drawBackground() {
+        console.log('context3.width:',this.canvas3.width)
         //Add Background
         this.context3.drawImage(this.backgroundImage,0,0,this.canvas3.width,this.canvas3.height)
-        requestAnimationFrame(() => {this.drawBackground})
+        setInterval(() => this.drawBackground(),1000/this.canvas3FPS)
+        // requestAnimationFrame(() => {this.drawBackground})
     }
 
     /**
@@ -107,7 +109,8 @@ export class Game {
             this.gameOver()
         }
         if(this.gameRunning) {
-            requestAnimationFrame(() => {this.updateCanvas1})
+            // setInterval(() => this.updateCanvas1(), 1000/this.canvas1FPS)
+            requestAnimationFrame(this.updateCanvas1)
         }
     }
 
@@ -288,11 +291,11 @@ export class Game {
         this.gameRunning = true
         // Game
         this.clock.tick()
-        this.drawBackground.bind(this)
-        this.updateCanvas1.bind(this)
+        this.drawBackground()
+        this.updateCanvas1()
         this.ship.enableSteering()
-        this.updateCanvas2()
-        this.generateDebri()
+        // this.updateCanvas2()
+        // this.generateDebri()
     }
 
 
