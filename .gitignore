@@ -1,3 +1,9 @@
+#executables
+executables
+
+#.DS_Store
+.DS_Store
+
 #js folder
 js
 
