@@ -1,6 +1,10 @@
-import {app, BrowserWindow, ipcMain, ipcRenderer} from 'electron';
+import {app, BrowserWindow, ipcMain} from 'electron';
 import * as fs from 'fs'
+import * as path from 'path'
+import * as Store from 'electron-store'
+
 let window:BrowserWindow;
+const store = new Store();
 
 function createWindow() {
     window = new BrowserWindow({
@@ -58,38 +62,14 @@ ipcMain.handle('main-menu', () => {
     return message
 })
 
-ipcMain.handle('game-level-persist', (event, gameLevel) => {
-    persistGameLevel(gameLevel)
+ipcMain.handle('game-level-persist', async (event, gameLevel) => {
+    store.set('gameLevel', gameLevel)
+    var message = 'gameLevel:'+gameLevel+' stored'
+    return message
 })
 
-ipcMain.handle('game-level-retrieve', async (event, gameLevel) => {
-   var level = await retrieveGameLevel()
+ipcMain.handle('game-level-retrieve', async (event) => {
+   var level = store.get('gameLevel')
    return level
 })
-
-function persistGameLevel(level:number) {
-    var path = 'json/gameLevel.json'
-
-    try{
-        fs.promises.writeFile(path,level.toString())
-    }
-    catch(error) {
-        console.error(error)
-    }
-    
-}
-
-async function retrieveGameLevel():Promise<number> {
-    var path = 'json/gameLevel.json'
-    var gameLevel:number = 0;
-    try{
-        var data:string = await fs.promises.readFile(path,'utf-8')
-        gameLevel = parseInt(data)
-        return gameLevel;
-    }
-    catch(error) {
-        console.error(error)
-    }
-    return gameLevel
-}
 
