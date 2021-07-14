@@ -10,7 +10,8 @@
   "author": "Zachary Ishmael",
   "license": "ISC",
   "dependencies": {
-    "electron": "^13.1.1"
+    "electron": "^13.1.1",
+    "electron-store": "^8.0.0"
   },
   "devDependencies": {
     "@types/electron": "^1.6.10"
