@@ -5,7 +5,8 @@ import * as Store from 'electron-store'
 
 let window:BrowserWindow;
 const store = new Store();
-
+var imagePath = path.join(__dirname,'..','img','ship.png'); 
+console.log(imagePath)
 function createWindow() {
     window = new BrowserWindow({
         width:921,
@@ -17,9 +18,11 @@ function createWindow() {
             contextIsolation: false,//otherwise "WorldSafe".. message still appears
             nodeIntegration: true //whether you can access node methods - e.g. requires, anywhere in the app's js
             // preload: path.join(__dirname, "preload.js")
-        }
+        },
+        icon: imagePath
     })
 
+    window.setIcon(path.join(__dirname, '..','img','ship.png'));
     window.loadFile('html/main-menu.html')
 
     if (process.env.NODE_ENV == 'dev-tools'){
