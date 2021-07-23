@@ -16,12 +16,14 @@
 
 ## Videos
 
+### Current version of the Game
+[![Game Video Youtube](https://user-images.githubusercontent.com/38586415/125120160-ff4a6700-e0e9-11eb-8bf0-a020a0ab753b.png)](https://www.youtube.com/watch?v=jfbsr38BSRU)
+
+
 ### Game MVP
 The first playable version of the game - Minimum Viable Product
 [![Game Video](https://user-images.githubusercontent.com/38586415/125111662-13886700-e0de-11eb-8472-1c18c8442b1f.png)](https://youtu.be/gDPPpdPJcXs)
 
-### Current version of the Game
-[![Game Video Youtube](https://user-images.githubusercontent.com/38586415/125120160-ff4a6700-e0e9-11eb-8bf0-a020a0ab753b.png)](https://www.youtube.com/watch?v=jfbsr38BSRU)
 
 
 ## Background
