@@ -6,8 +6,8 @@
  `npm start`
  
  ## Tables of Contents
-* [First Version](#game-mvp)
 * [Current Version](#current-version-of-the-game)
+* [First Version](#game-mvp)
 * [Background](#background)
 * [Images](#images)
 * [Technologies](#technologies)
