@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "electron": "^13.1.1",
-    "electron-store": "^8.0.0"
+    "electron-store": "^8.0.0",
+    "sass": "^1.37.5",
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
     "@types/electron": "^1.6.10"
