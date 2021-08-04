@@ -3,6 +3,7 @@
  
  Instruction on how to run the game:
  - open up in the terminal and then type:
+ `npm install` then
  `npm start`
  
  ## Tables of Contents
@@ -41,4 +42,7 @@ Technologies used in this project were:
 
 ## Running the project
 You will need to have Node.js installed. You then just need to `cd` to the project folder in the termainl and type:
-`npm install`
+
+`npm install` (to install node_modules needed to run thw project) then
+
+`npm start` (to start the program)
