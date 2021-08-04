@@ -42,6 +42,7 @@ Technologies used in this project were:
 
 ## Running the project
 You will need to have Node.js installed. You then just need to `cd` to the project folder in the termainl and type:
+
 `npm install` (to install node_modules needed to run thw project) then
 
 `npm start` (to start the program)
