@@ -1,6 +1,8 @@
 # Asteroid Field Game
  Asteriod Field Game
+ 
  [see YouTube video of Gameplay](https://www.youtube.com/watch?v=jfbsr38BSRU)
+ 
  Instruction on how to run the game:
  - open up in the terminal and then type:
  `npm install` then
