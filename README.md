@@ -34,6 +34,9 @@ I set out to make a 'space invaders' like retro-game. I then came upon the idea 
 
 ## Images
 <img width="921" alt="image" src="https://user-images.githubusercontent.com/38586415/124960021-c3dd6900-e013-11eb-8398-fe05f4fe34ac.png">
+![IMG_2110](https://github.com/Zaederx/asteroid_field/assets/38586415/ca8174cd-321a-4921-b963-5835cde751a0)
+![IMG_2111](https://github.com/Zaederx/asteroid_field/assets/38586415/be055a2b-576c-4038-aabb-068790e41ff7)
+![IMG_2112](https://github.com/Zaederx/asteroid_field/assets/38586415/0163beab-2817-4215-a740-77ca050b84d3)
 
 ## Technologies
 Technologies used in this project were:
