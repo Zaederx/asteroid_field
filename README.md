@@ -1,5 +1,5 @@
 # Asteroid Field Game
- Asteriod Field Game
+ Asteriod Field Game. Originally tried making this in python, but switched to using node and typescript.
  
  ## [see YouTube video of Gameplay](https://www.youtube.com/watch?v=jfbsr38BSRU)
  
