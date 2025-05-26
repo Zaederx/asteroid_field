@@ -30,7 +30,7 @@ The first playable version of the game - Minimum Viable Product
 
 
 ## Background
-I set out to make a 'space invaders' like retro-game. I then came upon the idea of making a game where you would avoid asteroid fields. After some days of coding, this is the final product.
+I set out to make a 'space invaders' like retro-game. I then came upon the idea of making a game where you would avoid asteroid fields. After some days of coding, this is the final product. I also made the music for the game.
 
 ## Images
 <img width="921" alt="image" src="https://user-images.githubusercontent.com/38586415/124960021-c3dd6900-e013-11eb-8398-fe05f4fe34ac.png">
