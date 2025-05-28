@@ -21,6 +21,8 @@ export class Game {
     canvas1 = document.getElementById('canvas1') as HTMLCanvasElement
     canvas2 = document.getElementById('canvas2') as HTMLCanvasElement
     canvas3 = document.getElementById('canvas3') as HTMLCanvasElement
+    WIDTH = 918
+    HEIGHT = 575
 
     //see - https://javascript.info/bind - losing this problem
     context1 = (document.getElementById('canvas1') as HTMLCanvasElement).getContext('2d') as CanvasRenderingContext2D
@@ -67,19 +69,24 @@ export class Game {
     loseGameMusic = document.querySelector('#lose-music') as HTMLAudioElement
 
     constructor(level:number) {
-        this.canvas1.width = 918
-        this.canvas1.height = 575
-        this.canvas2.width = 918
-        this.canvas2.height = 575
-        this.canvas3.width = 918
-        this.canvas3.height = 575
+        //set canvas width and height
+        this.canvas1.width = this.WIDTH
+        this.canvas1.height = this.HEIGHT
+        this.canvas2.width = this.WIDTH
+        this.canvas2.height = this.HEIGHT
+        this.canvas3.width = this.WIDTH
+        this.canvas3.height = this.HEIGHT
+        //set background image
         this.backgroundImage.src = '../img/starry-background.svg'
         //context1 fillStyle
         this.context1.fillStyle = 'rgb(200, 200, 200)'
         this.pause_btn ? this.pause_btn.onclick = () => this.togglePauseButton() : console.log('pause-btn is null')
-        this.play_btn_img.src = '../img/play-btn.svg'  
+        this.play_btn_img.src = '../img/play-btn.svg'
+        //hide options menu
         this.options.style.display = 'none'
+        //enable menu button
         this.main_menu_btn ? this.main_menu_btn.onclick = () => this.clickMainMenuBtn() : console.error('main-menu btn is null')
+        //prepare ship
         this.ship = new Ship(this.canvas1.width,this.canvas1.height,this.imageSrc,this.crashImgSrc)
         this.setGameLevel(level) //sets game setting objects
     }
@@ -248,6 +255,7 @@ export class Game {
         this.clock.stopTicking()
         this.ship.disableSteering()
         this.pause_btn_img.src = '../img/play-btn.svg'
+        this.displayMenu()
     }
     
     /**
@@ -256,6 +264,7 @@ export class Game {
     resumeGame() {
         this.runGame()
         this.pause_btn_img.src = '../img/pause-btn.svg'
+        this.hideMenu()
     }
     
     /**
@@ -282,15 +291,19 @@ export class Game {
         this.ship.disableSteering()
         this.playLoseMusic()
         this.pauseGamePlayMusic()
-        this.toMainMenu()
+        this.displayMenu()
     }
 
     /**
      * Displays Back to Main Menu button when
      * game is lost
      */
-    toMainMenu() {
+    displayMenu() {
         this.options.style.display = 'block'
+    }
+
+    hideMenu() {
+        this.options.style.display = 'none'
     }
 
     /**
